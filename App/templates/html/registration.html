@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <title>Registration</title>
+</head>
+<body>
+    <h1>Register Yourself</h1>
+    
+    <form action="/App/register/" method="POST">
+        {% csrf_token %}
+
+        <label for="first_name" name="first_name">First name:</label>
+        <input type="text" name="first_name" placeholder="Enter first name"><br>
+
+        <label for="last_name" name="last_name">Last name:</label>
+        <input type="text" name="last_name" placeholder="Enter last name"><br>
+
+        <label for="mobile" name="mobile">Mobile No:</label>
+        <input type="text" name="mobile" placeholder="Enter mobile number"><br>
+
+        <label for="email" name="email">Email:</label>
+        <input type="text" name="email" placeholder="Enter email"><br>
+
+        <label for="username" name="username">Username:</label>
+        <input type="text" name="username" placeholder="Enter username"><br>
+
+        <label for="password1" name="password1">Password:</label>
+        <input type="password" name="password1" placeholder="Enter password"><br>
+        
+        <label for="password2" name="password2">Conform Password:</label>
+        <input type="password" name="password2" placeholder="Re-enter password"><br>
+       
+        <input type="submit">
+    </form>
+    <div>
+        {% for message in messages %}
+        <h3>{{ message }}</h3>
+        {% endfor %}
+   
+    </div>
+</body>
+</html>

@@ -1,28 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    <title>Login</title>
-</head>
-<body>
-<h1>LOGIN</h1>
-<form method="POST" action="/App/login/">
-    {% csrf_token %}
-    <input type="text" name="username" placeholder="Username..." ><br>
-    <input type="password" name="password" placeholder="Password..."><br>
-    <input type="submit"><br>
-    
-</form>
-<div class="container">
-    <h3>Not Registered?Click here for</h3> 
-    <a href="{% url 'App:register'%}">register</a>
-</div>
- <div>
-    {% for message in messages %}
-    <h3>{{ message }}</h3>
-    {% endfor %}
-</div>
-</body>
-</html>
+{% extends 'html/base.html' %}
+{% block 'title' %}Login{% endblock 'title' %}
+{% block navbar %}
+  <div class="dropdown mx-3">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+        Welcome, {{username}}
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <li><a class="dropdown-item" href="{% url 'App:user_logout' %}">Logout</a></li>
+    </ul>
+  </div>
+{% endblock navbar %}
+{% block body %}
+    <div class="row">
+		{% for product in products %}
+		<div class="col-lg-3 card">
+			<img class="thumbnail" height="300" width="auto" src="{{product.imageURL}}">
+			<div class="box-element product">
+				<h6><strong>{{product.name}}</strong></h6>
+				<hr>
+
+				<!--<button data-product="{{product.id}}" data-action="add" class="btn btn-outline-secondary add-btn update-cart"><a href="{% url 'App:cart' %}">Add to Cart</a></button>-->
+				<button data-product="{{product.id}}" data-action="add" class="btn btn-outline-success update-cart">Add to Cart</button>
+				<a class="btn btn-outline-success" href="#">View</a>
+				<h4 style="display: inline-block; float: right"><strong>${{product.price}}</strong></h4>
+
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+{% endblock body%}
+

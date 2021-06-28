@@ -1,7 +1,38 @@
-{% extends 'html/base.html' %}
+{% extends 'html/base2.html' %}
 
 {% block 'title' %}Admin Dashboard{% endblock %}
-{% block 'navbar' %}{% endblock 'navbar' %}
 {% block 'body' %}
-<h1>Admin page</h1>
-{% endblock %}
+    {% for message in messages  %}
+        <p class="alert alert-success" role="alert">{{message}}</p>
+    {% endfor %}
+
+    <h1>Orders Recived</h1>
+    <div class="box-element mt-5">
+        <div class="cart-row">
+            <div style="flex:1"><strong>Item</strong></div>
+            <div style="flex:1"><strong>Name</strong></div>
+            <div style="flex:1"><strong>Price</strong></div>
+            <div style="flex:1"><strong>Quantity</strong></div>
+            <div style="flex:1"><strong>Customer Name</strong></div>
+            <div style="flex:1"><strong>Date</strong></div>
+            <div style="flex:1"><strong>Time</strong></div>
+            <div style="flex:1"><strong>Status</strong></div>
+        </div>
+        {% for item in items %}
+
+        <div class="cart-row mt-2">
+            <div style="flex:1"><img class="row-image" src="{{item.product.imageURL}}"></div>
+            <div style="flex:1"><p class="pt-4">{{item.product.name}}</p></div>
+            <div style="flex:1"><p class="pt-4">Rs {{item.product.price|floatformat:2}}</p></div>
+            <div style="flex:1"><p class="quantity pt-4">{{item.quantity}}</p></div>
+            <div style="flex:1"><p class="pt-4">{{item.order.customer.name}}</p></div>
+        
+            <div style="flex:1"><p class="pt-4">{{pay.recieve_date}}</p></div>
+            <div style="flex:1"><p class="pt-4">{{pay.recieve_time}}</p></div>
+            <div style="flex:1"><p class="pt-4">{{pay.pay_status}}</p></div>
+            </div>
+        {% endfor %}
+        
+        
+    </div>
+{% endblock  %}

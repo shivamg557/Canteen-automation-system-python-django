@@ -1,15 +1,6 @@
 {% extends 'html/base.html' %}
 {% block 'title' %}Login{% endblock 'title' %}
-{% block navbar %}
-  <div class="dropdown mx-3">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-        Welcome, {{username}}
-    </button>
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <li><a class="dropdown-item" href="{% url 'App:user_logout' %}">Logout</a></li>
-    </ul>
-  </div>
-{% endblock navbar %}
+
 {% block body %}
     <div class="row">
 		{% for product in products %}
@@ -20,9 +11,9 @@
 				<hr>
 
 				<!--<button data-product="{{product.id}}" data-action="add" class="btn btn-outline-secondary add-btn update-cart"><a href="{% url 'App:cart' %}">Add to Cart</a></button>-->
-				<button data-product="{{product.id}}" data-action="add" class="btn btn-outline-success update-cart">Add to Cart</button>
+				<button onclick = "location.href='/cart'" data-product="{{product.id}}" data-action="add" class="btn btn-outline-success update-cart">Add to Cart</button>
 				<a class="btn btn-outline-success" href="#">View</a>
-				<h4 style="display: inline-block; float: right"><strong>${{product.price}}</strong></h4>
+				<h4 style="display: inline-block; float: right"><strong>Rs {{product.price}}</strong></h4>
 
 			</div>
 		</div>

@@ -1,25 +1,28 @@
 {% extends 'html/base.html' %}
 
 {%block 'title' %}Home{% endblock %}
-{% block navbar %}
-<button type="button" class="btn btn-primary mx-3" data-bs-toggle="modal" data-bs-target="#login">Login</button>
-{% endblock navbar %}
+
 {% block body %}
+	{% for message in messages  %}
+        <p class="alert alert-success" role="alert">{{message}}</p>
+    {% endfor %}
     <div class="row">
 		{% for product in products %}
-		<div class="col-lg-3 card">
-			<img class="thumbnail" height="300" width="auto" src="{{product.imageURL}}">
-			<div class="box-element product">
-				<h6><strong>{{product.name}}</strong></h6>
-				<hr>
-
-				<!--<button data-product="{{product.id}}" data-action="add" class="btn btn-outline-secondary add-btn update-cart"><a href="{% url 'App:cart' %}">Add to Cart</a></button>-->
-				<button data-product="{{product.id}}" data-action="add" class="btn btn-outline-success update-cart"  href="">Add to Cart</button>
-				<a class="btn btn-outline-success" href="#">View</a>
-				<h4 style="display: inline-block; float: right"><strong>Rs {{product.price}}</strong></h4>
-
+			<div class="col-lg-3 card">
+				<img class="thumbnail" height="300" width="auto" src="{{product.imageURL}}">
+				<div class="box-element product">
+					<h6><strong>{{product.name}}</strong></h6>
+					<hr>
+					<!--<form action="/cart/">
+						<input type="hidden" name="product_id" value={{product.id}} id="product_id">
+						<button type="submit" class="btn btn-primary">Add to Cart</button>
+					</form>-->
+					<!--<button data-product="{{product.id}}" data-action="add" class="btn btn-outline-secondary add-btn update-cart"><a href="{% url 'App:cart' %}">Add to Cart</a></button>-->
+					<button data-product="{{product.id}}" data-action="add" class="btn btn-outline-success update-cart">Add to Cart</button>
+					<a class="btn btn-outline-success" href="{% url 'App:productDetail' %}">View</a>
+					<h4 style="display: inline-block; float: right"><strong>Rs {{product.price}}</strong></h4>
+				</div>
 			</div>
-		</div>
 		{% endfor %}
 	</div>
 {% endblock body%}

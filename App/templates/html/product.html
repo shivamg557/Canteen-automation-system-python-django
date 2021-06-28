@@ -1,0 +1,39 @@
+{% extends 'html/base2.html' %}
+{% block 'title' %}Product{% endblock%}
+{% block 'body'%}
+{% for message in messages  %}
+    <p class="alert alert-success" role="alert">{{message}}</p>
+{% endfor %}
+<h1 class="mt-2 text-center">PRODUCT LIST</h1>
+<a href="{% url 'App:addProduct' %}" class="btn btn-primary">Add New Product</a>
+<div class="box-element mt-3">
+        <div class="cart-row">
+            <div style="flex:1"><strong>Id</strong></div>
+            <div style="flex:1"><strong>Item</strong></div>
+            <div style="flex:1"><strong>Name</strong></div>
+            <div style="flex:2"><strong>Description</strong></div>
+            <div style="flex:1"><strong>Price</strong></div>
+            <div style="flex:1"><strong>Status</strong></div>
+            <div style="flex:1"><strong>Action</strong></div>
+        </div>
+        {% for product in products %}
+            <div class="cart-row mt-2">
+                <div style="flex:1"><p class="pt-4">{{product.id}}</p></div>
+                <div style="flex:1"><img class="row-image" src="{{product.imageURL}}"></div>
+                <div style="flex:1"><p class="pt-4">{{product.name}}</p></div>
+                <div style="flex:2" ><p class="pt-4">this is amazing, i want to order this i love food. food is my love have a great day</p></div>
+                <div style="flex:1"><p class="pt-4">Rs {{product.price|floatformat:2}}</p></div>
+                <div style="flex:1"><p class="pt-4">avalable</p></div>
+                <div style="flex:1">
+                    <form action="/editProduct/">
+                        <input type="hidden" name="product_id" value={{product.id}} id="product_id">
+                        <button type="submit" class="btn btn-primary p-1 m-1">Edit</button>
+                    </form>
+                    <form action="/delProduct/">
+                        <input type="hidden" name="product_id" value={{product.id}} id="product_id">
+                        <button type="submit" class="btn btn-primary p-1">Delete</button>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+{% endblock  %}

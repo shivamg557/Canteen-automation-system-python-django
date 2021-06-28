@@ -29,12 +29,12 @@ class Student(models.Model):
         return self.first_name +" "+self.last_name
 
 class Customer(models.Model):
-    user = models.OneToOneField(User, on_delete= models.CASCADE,null=True,blank=True)
+    user = models.OneToOneField(User,on_delete=models.SET_NULL,null=True,blank=True)
     name= models.CharField(max_length=100,null=True)
     email = models.CharField(max_length=100,null=True)
 
     def __str__(self):
-        return self.name
+        return self.name or ""
 
 class Product(models.Model):
     name= models.CharField(max_length=100,null=True)
@@ -51,7 +51,7 @@ class Product(models.Model):
         except:
             url=''
         return url
-    
+        
 class Order(models.Model):
     customer=models.ForeignKey(Customer,on_delete=models.SET_NULL,blank=True,null=True)
     ordered_date = models.DateTimeField(auto_now_add=True)
@@ -84,20 +84,16 @@ class OrderItem(models.Model):
         total=self.product.price * self.quantity
         return total
 
-class ShippingAddress(models.Model):
-    customer=models.ForeignKey(Customer,on_delete=models.SET_NULL,blank=True,null=True)
-    order= models.ForeignKey(Order,on_delete=models.SET_NULL,blank=True,null=True)
-    address= models.CharField(max_length=100,null=True)
-    city= models.CharField(max_length=100,null=True)
-    state= models.CharField(max_length=100,null=True)
-    zipcode= models.CharField(max_length=100,null=True)
-    date_added = models.DateTimeField(auto_now_add=True)
+
+class Payment(models.Model):
+    order = models.OneToOneField(Order,on_delete=models.SET_NULL,null=True,blank=True)
+    pay_date = models.DateTimeField(auto_now_add=True)
+    recieve_date = models.DateField()
+    recieve_time = models.TimeField()
+    pay_status = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.address
-    
-
-
+        return str(self.id)
 
 
     

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+    <link rel="stylesheet" href="{% static 'css/store.css' %}">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <title>SignUp</title>
+
+    <style>
+        .button{
+            margin-left:46%;
+            width:5%;
+           
+        } 
+        
+    </style>
+
+</head>
+<body>
+<form  method="POST">
+    {% csrf_token %}
+    {% for message in messages  %}
+        <p class="alert alert-success" role="alert">{{message}}</p>
+    {% endfor %}
+    <h1 class=" mb-5" style="text-align:center; margin-top:200px ">SignUp</h1>
+    <div class="form-group row ">
+        <label for="username" style="margin-left:38%; font-weight:bold;" class="col-sm-2 col-form-label">Username</label>
+        <div class="col-sm-2">
+            <input type="text" style="margin-left:-150px" class="form-control" id="loginusername" name="username" placeholder="Enter username" required><br>
+        </div>
+    </div>
+
+    <div class="form-group row" >
+        <label for="password" style="margin-left:38%;font-weight:bold;" class="col-sm-2 col-form-label">Password</label>
+        <div class="col-sm-2">
+            <input type="password" style="margin-left:-150px" class="form-control" id="loginpassword" name="password" placeholder="Enter password" required><br>
+        </div>
+        
+    </div>
+    <div class="form-group row button" >
+        <button type="submit" class="btn btn-primary">Login</button>
+    </div>
+    
+</form>
+</body>
+</html>
